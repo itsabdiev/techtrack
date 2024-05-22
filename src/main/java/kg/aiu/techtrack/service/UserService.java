@@ -7,4 +7,7 @@ public interface UserService extends UserDetailsService {
 
     User loadUserByEmail(String email);
 
+    boolean existsByEmail(String email);
+
+    void save(User user);
 }

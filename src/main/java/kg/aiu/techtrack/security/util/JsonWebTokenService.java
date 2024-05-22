@@ -52,7 +52,6 @@ public class JsonWebTokenService {
     public String generateToken(User user) {
         Map<String, Object> extraClaims = new HashMap<>();
         extraClaims.put("role", user.getRole().name());
-        extraClaims.put("profile_photo_url", user.getProfileImagePath());
         extraClaims.put("firstName", user.getFirstName());
         extraClaims.put("lastName", user.getLastName());
         return generateToken(extraClaims, user.getEmail());

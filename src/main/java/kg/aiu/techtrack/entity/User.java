@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 import kg.aiu.techtrack.entity.enums.Role;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,10 +54,8 @@ public class User extends BaseEntity implements UserDetails {
     String lastName;
 
     @Column(nullable = false)
-    String profileImagePath;
-
-    @Column(nullable = false)
-    Boolean enabled;
+    @Builder.Default
+    Boolean enabled = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

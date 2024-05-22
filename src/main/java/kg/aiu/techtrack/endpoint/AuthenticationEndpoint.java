@@ -3,8 +3,12 @@ package kg.aiu.techtrack.endpoint;
 
 import io.jsonwebtoken.JwtException;
 import kg.aiu.techtrack.dto.request.AuthenticationRequest;
+import kg.aiu.techtrack.dto.request.SignUpRequest;
 import kg.aiu.techtrack.dto.response.AuthenticationResponse;
+import kg.aiu.techtrack.dto.response.MessageResponse;
 import kg.aiu.techtrack.entity.User;
+import kg.aiu.techtrack.entity.enums.Role;
+import kg.aiu.techtrack.exception.UserAlreadyExistException;
 import kg.aiu.techtrack.security.util.JsonWebTokenService;
 import kg.aiu.techtrack.service.UserService;
 import lombok.AccessLevel;
@@ -13,7 +17,10 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+
 
 @Component
 @RequiredArgsConstructor
@@ -24,6 +31,7 @@ public class AuthenticationEndpoint {
     AuthenticationManager authenticationManager;
     UserService userService;
     JsonWebTokenService jsonWebTokenService;
+    PasswordEncoder passwordEncoder;
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
@@ -50,5 +58,29 @@ public class AuthenticationEndpoint {
                 .refresh_token(jsonWebTokenService.generateRefreshToken(email))
                 .build();
     }
+
+    public MessageResponse signUp(SignUpRequest signUpRequest) {
+
+        if (userService.existsByEmail(signUpRequest.email())) {
+            throw new UserAlreadyExistException();
+        }
+
+        User user = User.builder()
+                .role(Role.USER)
+                .email(signUpRequest.email())
+                .firstName(signUpRequest.firstName())
+                .lastName(signUpRequest.lastName())
+                .phoneNumber(signUpRequest.phoneNumber())
+                .password(passwordEncoder.encode(signUpRequest.password()))
+                .build();
+
+        userService.save(user);
+
+        return MessageResponse.builder()
+                .message("User has been registered")
+                .statusCode(200)
+                .build();
+    }
+
 
 }

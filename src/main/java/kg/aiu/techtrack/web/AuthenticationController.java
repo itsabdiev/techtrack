@@ -1,7 +1,9 @@
 package kg.aiu.techtrack.web;
 
 import kg.aiu.techtrack.dto.request.AuthenticationRequest;
+import kg.aiu.techtrack.dto.request.SignUpRequest;
 import kg.aiu.techtrack.dto.response.AuthenticationResponse;
+import kg.aiu.techtrack.dto.response.MessageResponse;
 import kg.aiu.techtrack.endpoint.AuthenticationEndpoint;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +33,11 @@ public class AuthenticationController {
     public AuthenticationResponse generateNewAccessAndRefreshTokenByRefreshToken(
             @RequestParam(name = "refresh_token") String refresh_token) {
         return authenticationEndpoint.generateNewAccessAndRefreshTokenByRefreshToken(refresh_token);
+    }
+
+    @PostMapping("/sign-up")
+    public MessageResponse signUp(
+            @RequestBody SignUpRequest signUpRequest) {
+        return authenticationEndpoint.signUp(signUpRequest);
     }
 }

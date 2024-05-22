@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,5 +39,6 @@ public abstract class BaseEntity {
     Timestamp updatedAt;
 
     @Column(nullable = false)
-    boolean hasBeenRemoved;
+    @Builder.Default
+    boolean hasBeenRemoved =  false;
 }
