@@ -41,6 +41,11 @@ public class UserServiceImplementation implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public void delete(User user) {
+        userRepository.delete(user);
+    }
+
     @PostConstruct
     void init() {
         if (userRepository.count() < 1) {

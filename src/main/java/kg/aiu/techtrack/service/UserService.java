@@ -10,4 +10,6 @@ public interface UserService extends UserDetailsService {
     boolean existsByEmail(String email);
 
     void save(User user);
+
+    void delete(User user);
 }

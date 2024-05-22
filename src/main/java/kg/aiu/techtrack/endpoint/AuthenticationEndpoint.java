@@ -78,7 +78,7 @@ public class AuthenticationEndpoint {
 
         return MessageResponse.builder()
                 .message("User has been registered")
-                .statusCode(200)
+                .statusCode(201)
                 .build();
     }
 
