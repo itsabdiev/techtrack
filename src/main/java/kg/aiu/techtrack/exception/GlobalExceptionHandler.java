@@ -55,4 +55,15 @@ public class GlobalExceptionHandler {
                 .message(uaee.getMessage())
                 .build();
     }
+
+    @ExceptionHandler(EquipmentAlreadyExistException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MessageResponse equipmentAlreadyExistExceptionHandling(EquipmentAlreadyExistException uaee) {
+        return MessageResponse.builder()
+                .statusCode(400)
+                .message(uaee.getMessage())
+                .build();
+    }
+
+
 }

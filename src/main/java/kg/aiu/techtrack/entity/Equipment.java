@@ -1,8 +1,13 @@
 package kg.aiu.techtrack.entity;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
+import kg.aiu.techtrack.entity.enums.EquipmentStatus;
+import kg.aiu.techtrack.entity.enums.EquipmentType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -22,13 +27,19 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "equipment_id", callSuper = false)
+@EqualsAndHashCode(of = "equipment_number", callSuper = false)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Equipment extends BaseEntity {
 
-    UUID equipmentId;
+    UUID equipmentNumber;
+
     String model;
-    String type;
-    String status;
+
+    @Enumerated(value = EnumType.STRING)
+    EquipmentType type;
+
+    @Enumerated(value = EnumType.STRING)
+    EquipmentStatus status;
+
     Date installationDate;
 }

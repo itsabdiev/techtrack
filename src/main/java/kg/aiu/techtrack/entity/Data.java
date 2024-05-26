@@ -2,7 +2,9 @@ package kg.aiu.techtrack.entity;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -24,11 +26,12 @@ import java.sql.Timestamp;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Data extends BaseEntity {
 
-    String temperature;
+    Integer temperature;
     Integer speed;
     Integer pressure;
     Timestamp registrationTime;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "equipment_id")
     Equipment equipment;
 }

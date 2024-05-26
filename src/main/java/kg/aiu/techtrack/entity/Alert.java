@@ -2,6 +2,8 @@ package kg.aiu.techtrack.entity;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -24,4 +26,8 @@ public class Alert extends BaseEntity {
 
     String warningMessage;
     Timestamp registrationTime;
+
+    @ManyToOne
+    @JoinColumn(name = "equipment_id")
+    Equipment equipment;
 }
