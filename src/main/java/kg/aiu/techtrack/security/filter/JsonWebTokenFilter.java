@@ -38,8 +38,9 @@ public class JsonWebTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {
-        return Arrays.stream(GlobalSecurityConfiguration.whiteList)
+        boolean b = Arrays.stream(GlobalSecurityConfiguration.whiteList)
                 .anyMatch(url -> new AntPathRequestMatcher(url).matches(request));
+        return b;
     }
 
     @Override
