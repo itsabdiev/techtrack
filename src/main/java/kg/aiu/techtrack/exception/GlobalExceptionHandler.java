@@ -58,12 +58,23 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EquipmentAlreadyExistException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public MessageResponse equipmentAlreadyExistExceptionHandling(EquipmentAlreadyExistException uaee) {
+    public MessageResponse equipmentAlreadyExistExceptionHandling(EquipmentAlreadyExistException eaee) {
         return MessageResponse.builder()
                 .statusCode(400)
-                .message(uaee.getMessage())
+                .message(eaee.getMessage())
                 .build();
     }
+
+    @ExceptionHandler(DataForEquipmentAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MessageResponse dataForEquipmentAlreadyExistsExceptionHandling(DataForEquipmentAlreadyExistsException dfeaee) {
+        return MessageResponse.builder()
+                .statusCode(400)
+                .message(dfeaee.getMessage())
+                .build();
+    }
+
+
 
 
 }

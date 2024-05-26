@@ -27,6 +27,7 @@ public class DataEndpoint {
 
     DataService dataService;
     EquipmentService equipmentService;
+    EquipmentEndpoint equipmentEndpoint;
 
     public List<DataResponse> getAll() {
         return dataService.getAll().stream().map(this::entityToDtoMapper).collect(Collectors.toList());
@@ -59,6 +60,7 @@ public class DataEndpoint {
     }
 
     public MessageResponse save(DataRequest dataRequest) {
+        equipmentEndpoint.existsByIdOrThrowException(dataRequest.equipmentId());
         Optional<Data> optionalData = dataService.existsByEquipmentId(dataRequest.equipmentId());
         if (optionalData.isPresent()) throw new DataForEquipmentAlreadyExistsException();
         dataService.save(dtoToEntityMapper(dataRequest));
@@ -70,6 +72,7 @@ public class DataEndpoint {
 
     public MessageResponse update(Long id, DataRequest dataRequest) {
         existsByIdOrThrowException(id);
+        equipmentEndpoint.existsByIdOrThrowException(dataRequest.equipmentId());
         Data data = dtoToEntityMapper(dataRequest);
         data.setId(id);
         dataService.save(data);

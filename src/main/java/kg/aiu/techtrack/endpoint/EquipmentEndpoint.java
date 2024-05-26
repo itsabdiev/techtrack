@@ -61,7 +61,7 @@ public class EquipmentEndpoint {
         return entityToDtoMapper(equipmentService.getById(id));
     }
 
-    private void existsByIdOrThrowException(Long id) {
+    public void existsByIdOrThrowException(Long id) {
         if (!equipmentService.existsById(id)) throw new NotFoundException("Equipment has not been found");
     }
 

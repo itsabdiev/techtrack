@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 public class AlertEndpoint {
 
     AlertService alertService;
+    EquipmentEndpoint equipmentEndpoint;
     EquipmentService equipmentService;
 
     public List<AlertResponse> getAll() {
@@ -36,6 +37,7 @@ public class AlertEndpoint {
     }
 
     public MessageResponse save(AlertRequest alertRequest) {
+        equipmentEndpoint.existsByIdOrThrowException(alertRequest.equipmentId());
         alertService.save(dtoToEntityMapper(alertRequest));
         return MessageResponse.builder()
                 .message("Alert has been created")
@@ -61,6 +63,7 @@ public class AlertEndpoint {
 
     public MessageResponse update(Long id, AlertRequest alertRequest) {
         existsByIdOrThrowException(id);
+        equipmentEndpoint.existsByIdOrThrowException(alertRequest.equipmentId());
         Alert alert = dtoToEntityMapper(alertRequest);
         alert.setId(id);
         alertService.save(alert);
