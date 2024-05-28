@@ -8,6 +8,7 @@ Integration with PostgreSQL for data storage
 API documentation using OpenAPI
 JWT-based authentication
 Installation
+Link to video[https://youtu.be/07jY_g4iPuA]
 Clone the repository:
 
 <img align="center" alt="Java " width="550px" src="https://res.cloudinary.com/software-updater/image/upload/v1716740204/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2024-05-26_221106_azolya.png" />  <br />
