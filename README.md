@@ -29,7 +29,7 @@ TechTrack develops a platform for monitoring and managing technical equipment su
 git clone https://github.com/itsabdiev/techtrack.git techtrack
 cd techtrack
 change application properties according to your database
-mvn spring:boot run
+mvn spring-boot:run 
 ```
 
 ### Once the application is running, you can access the API documentation at http://localhost:8080/swagger-ui.html
