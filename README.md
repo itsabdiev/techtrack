@@ -32,7 +32,7 @@ change application properties according to your database
 mvn spring-boot:run 
 ```
 
-### Once the application is running, you can access the API documentation at http://localhost:8080/swagger-ui.html
+### Once the application is running, you can access the API documentation at http://localhost:8080/swagger-ui.html](http://localhost:8820/swagger-ui/index.html
 
 Spring Boot Starters:
 * spring-boot-starter-validation
